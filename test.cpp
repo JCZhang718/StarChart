@@ -21,7 +21,7 @@ const unsigned int SCR_WIDTH = 2560;
 const unsigned int SCR_HEIGHT = 1440;
 
 // camera
-Camera camera(glm::vec3(0.0f, 0.0f, 10.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 20.0f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
@@ -81,9 +81,9 @@ int main()
 
     // load models
     // -----------
+    Model earthModel("Models/Earth/Earth 2K.obj");
     Model moonModel("Models/Moon/Moon 2k.obj");
-    Model rocketModel("Models/Rocket/rocket.obj");
-    //Model backpackModel("Models/backpack/backpack.obj");
+    //Model rocketModel("Models/Rocket/rocket.obj");
 
 
     // draw in wireframe
@@ -120,30 +120,24 @@ int main()
         // render the moon model
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
+        model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));	// it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
-        moonModel.Draw(ourShader);
+        earthModel.Draw(ourShader);
 
         // render the rocket model
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(5.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(0.01f, 0.01f, 0.01f));	// it's a bit too big for our scene, so scale it down
+        model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));	// it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
-        rocketModel.Draw(ourShader);
+        moonModel.Draw(ourShader);
 
         // render the rocket model
+        /*
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-5.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(0.01f, 0.01f, 0.01f));	// it's a bit too big for our scene, so scale it down
+        model = glm::scale(model, glm::vec3(0.001f, 0.001f, 0.001f));	// it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
         rocketModel.Draw(ourShader);
-
-        // render the backpack model
-        /*
-        model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
-        ourShader.setMat4("model", model);
-        backpackModel.Draw(ourShader);
         */
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
