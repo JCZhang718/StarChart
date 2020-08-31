@@ -33,10 +33,6 @@
     <ClInclude Include="model.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="awesomeface.png" />
-    <Image Include="container.jpg" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{C42C01DA-B2DD-4D3E-BD87-1A5471D2DDD8}</ProjectGuid>

@@ -178,7 +178,7 @@ int main()
         // render the UFO model
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(totalTime, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::translate(model, glm::vec3(-80.0f, 5.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::translate(model, glm::vec3(-60.0f, 5.0f, 0.0f)); // translate it down so it's at the center of the scene
         model = glm::rotate(model, glm::radians(totalTime * 69.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
         model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));	// it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
@@ -187,7 +187,7 @@ int main()
         // render the spaceship model
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0, 0.0f, totalTime)); // translate it down so it's at the center of the scene
-        model = glm::translate(model, glm::vec3(0.0f, -5.0f, -80.0f)); // translate it down so it's at the center of the scene
+        model = glm::translate(model, glm::vec3(0.0f, -5.0f, -60.0f)); // translate it down so it's at the center of the scene
         model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));	// it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
         spaceshipModel.Draw(ourShader);
