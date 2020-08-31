@@ -81,8 +81,11 @@ int main()
 
     // load models
     // -----------
+    Model sunModel("Models/Sun/moon.obj");
     Model earthModel("Models/Earth/Earth 2K.obj");
     Model moonModel("Models/Moon/Moon 2k.obj");
+    Model marsModel("Models/Mars/Mars 2k.obj");
+    Model ufoModel("Models/UFO/UFO_Empty.obj");
     //Model rocketModel("Models/Rocket/rocket.obj");
 
 
@@ -105,7 +108,7 @@ int main()
 
         // render
         // ------
-        glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // don't forget to enable shader before setting uniforms
@@ -117,24 +120,50 @@ int main()
         ourShader.setMat4("projection", projection);
         ourShader.setMat4("view", view);
 
-        // render the moon model
+        // render the sun model
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));	// it's a bit too big for our scene, so scale it down
+        model = glm::scale(model, glm::vec3(0.05f, 0.05f, 0.05f));	// it's a bit too big for our scene, so scale it down
+        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 5.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
+        ourShader.setMat4("model", model);
+        sunModel.Draw(ourShader);
+
+        // render the earth model
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(10.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(0.25f, 0.25f, 0.25f));	// it's a bit too big for our scene, so scale it down
+        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 25.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
         ourShader.setMat4("model", model);
         earthModel.Draw(ourShader);
 
-        // render the rocket model
+        // render the moon model
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(5.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::translate(model, glm::vec3(12.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
         model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));	// it's a bit too big for our scene, so scale it down
+        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 50.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
         ourShader.setMat4("model", model);
         moonModel.Draw(ourShader);
+
+        // render the mars model
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(0.15f, 0.15f, 0.15f));	// it's a bit too big for our scene, so scale it down
+        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 25.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
+        ourShader.setMat4("model", model);
+        marsModel.Draw(ourShader);
+
+        // render the UFO model
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(0.0f, 5.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));	// it's a bit too big for our scene, so scale it down
+        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 69.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
+        ourShader.setMat4("model", model);
+        ufoModel.Draw(ourShader);
 
         // render the rocket model
         /*
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(-5.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::translate(model, glm::vec3(14.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
         model = glm::scale(model, glm::vec3(0.001f, 0.001f, 0.001f));	// it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
         rocketModel.Draw(ourShader);
