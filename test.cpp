@@ -69,7 +69,7 @@ int main()
     }
 
     // tell stb_image.h to flip loaded texture's on the y-axis (before loading model).
-    stbi_set_flip_vertically_on_load(true);
+    //stbi_set_flip_vertically_on_load(true);
 
     // configure global opengl state
     // -----------------------------
@@ -82,7 +82,8 @@ int main()
     // load models
     // -----------
     Model moonModel("Models/Moon/Moon 2k.obj");
-    Model rocketModel("Models/Rocket/Saturn V.obj");
+    Model rocketModel("Models/Rocket/rocket.obj");
+    //Model backpackModel("Models/backpack/backpack.obj");
 
 
     // draw in wireframe
@@ -124,11 +125,26 @@ int main()
         moonModel.Draw(ourShader);
 
         // render the rocket model
+        model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(5.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
+        model = glm::scale(model, glm::vec3(0.01f, 0.01f, 0.01f));	// it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
         rocketModel.Draw(ourShader);
 
+        // render the rocket model
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-5.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(0.01f, 0.01f, 0.01f));	// it's a bit too big for our scene, so scale it down
+        ourShader.setMat4("model", model);
+        rocketModel.Draw(ourShader);
+
+        // render the backpack model
+        /*
+        model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
+        ourShader.setMat4("model", model);
+        backpackModel.Draw(ourShader);
+        */
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
