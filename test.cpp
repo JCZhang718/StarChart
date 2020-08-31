@@ -29,6 +29,7 @@ bool firstMouse = true;
 // timing
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
+float totalTime = 0.0f;
 
 int main()
 {
@@ -86,7 +87,9 @@ int main()
     Model moonModel("Models/Moon/Moon 2k.obj");
     Model marsModel("Models/Mars/Mars 2k.obj");
     Model ufoModel("Models/UFO/UFO_Empty.obj");
-    //Model rocketModel("Models/Rocket/rocket.obj");
+    Model spaceshipModel("Models/Spaceship/Intergalactic_Spaceship-(Wavefront).obj");
+    Model jetModel("Models/Jet/Futuristic combat jet.obj");
+    Model rocketModel("Models/Rocket/rocket.obj");
 
 
     // draw in wireframe
@@ -100,6 +103,7 @@ int main()
         // --------------------
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
+        totalTime += deltaTime;
         lastFrame = currentFrame;
 
         // input
@@ -123,51 +127,77 @@ int main()
         // render the sun model
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::rotate(model, glm::radians(totalTime * 5.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
         model = glm::scale(model, glm::vec3(0.05f, 0.05f, 0.05f));	// it's a bit too big for our scene, so scale it down
-        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 5.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
         ourShader.setMat4("model", model);
         sunModel.Draw(ourShader);
 
         // render the earth model
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(10.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::rotate(model, glm::radians(totalTime * 5.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Spin around sun
+        model = glm::translate(model, glm::vec3(10.0f, 0.0f, 0.0f)); // translate it to the right of sun
+        model = glm::rotate(model, -glm::radians(totalTime * 25.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
         model = glm::scale(model, glm::vec3(0.25f, 0.25f, 0.25f));	// it's a bit too big for our scene, so scale it down
-        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 25.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
         ourShader.setMat4("model", model);
         earthModel.Draw(ourShader);
 
         // render the moon model
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(12.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));	// it's a bit too big for our scene, so scale it down
-        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 50.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
+        model = glm::rotate(model, glm::radians(totalTime * 5.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Spin around sun
+        model = glm::translate(model, glm::vec3(10.0f, 0.0f, 0.0f)); // translate it to the right of sun
+        model = glm::rotate(model, glm::radians(totalTime * 10.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Spin around earth
+        model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f)); // translate it to the right of earth
+        model = glm::rotate(model, -glm::radians(totalTime * 50.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
+        model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
         moonModel.Draw(ourShader);
 
+        // render the rocket model
+        model = glm::mat4(1.0f);
+        model = glm::rotate(model, glm::radians(totalTime * 5.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Spin around sun
+        model = glm::translate(model, glm::vec3(10.0f, 0.0f, 0.0f)); // translate it to the right of sun
+        model = glm::rotate(model, glm::radians(totalTime * 10.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Spin around earth
+        model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f)); // translate it to the right of earth
+        model = glm::rotate(model, glm::radians(totalTime * 50.0f), glm::vec3(1.0f, 0.0f, 0.0f)); // Spin around moon
+        model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f)); // translate it above the moon
+        model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f)); // Spin around moon
+        model = glm::scale(model, glm::vec3(0.001f, 0.001f, 0.001f));	// it's a bit too big for our scene, so scale it down
+        ourShader.setMat4("model", model);
+        rocketModel.Draw(ourShader);
+
         // render the mars model
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::rotate(model, glm::radians(totalTime * 5.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Spin around sun
+        model = glm::translate(model, glm::vec3(-15.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::rotate(model, -glm::radians(totalTime * 25.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
         model = glm::scale(model, glm::vec3(0.15f, 0.15f, 0.15f));	// it's a bit too big for our scene, so scale it down
-        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 25.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
         ourShader.setMat4("model", model);
         marsModel.Draw(ourShader);
 
         // render the UFO model
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, 5.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::translate(model, glm::vec3(totalTime, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::translate(model, glm::vec3(-80.0f, 5.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::rotate(model, glm::radians(totalTime * 69.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
         model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));	// it's a bit too big for our scene, so scale it down
-        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 69.0f), glm::vec3(0.0f, 0.1f, 0.0f)); // Spin
         ourShader.setMat4("model", model);
         ufoModel.Draw(ourShader);
 
-        // render the rocket model
-        /*
+        // render the spaceship model
         model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(14.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(0.001f, 0.001f, 0.001f));	// it's a bit too big for our scene, so scale it down
+        model = glm::translate(model, glm::vec3(0.0, 0.0f, totalTime)); // translate it down so it's at the center of the scene
+        model = glm::translate(model, glm::vec3(0.0f, -5.0f, -80.0f)); // translate it down so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));	// it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
-        rocketModel.Draw(ourShader);
-        */
+        spaceshipModel.Draw(ourShader);
+
+        // render the jet model
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(7.0f, 7.0f, -7.0f)); // translate it down so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(0.15f, 0.15f, 0.15f));	// it's a bit too big for our scene, so scale it down
+        ourShader.setMat4("model", model);
+        jetModel.Draw(ourShader);
+
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
