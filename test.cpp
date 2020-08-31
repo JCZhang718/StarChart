@@ -90,6 +90,7 @@ int main()
     Model spaceshipModel("Models/Spaceship/Intergalactic_Spaceship-(Wavefront).obj");
     Model jetModel("Models/Jet/Futuristic combat jet.obj");
     Model rocketModel("Models/Rocket/rocket.obj");
+    Model skyboxModel("Models/Skybox/skybox.obj");
 
 
     // draw in wireframe
@@ -119,7 +120,7 @@ int main()
         ourShader.use();
 
         // view/projection transformations
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 10000.0f);
         glm::mat4 view = camera.GetViewMatrix();
         ourShader.setMat4("projection", projection);
         ourShader.setMat4("view", view);
@@ -198,6 +199,13 @@ int main()
         ourShader.setMat4("model", model);
         jetModel.Draw(ourShader);
 
+
+        // render the skybox model
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(1000.0f, 1000.0f, 1000.0f));	// it's a bit too big for our scene, so scale it down
+        ourShader.setMat4("model", model);
+        skyboxModel.Draw(ourShader);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
