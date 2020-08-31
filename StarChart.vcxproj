@@ -93,8 +93,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\MiscPrograms\TCD\Graphics\StarChart\LibsAndInclude\Include;D:\MiscPrograms\TCD\Graphics\References\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\MiscPrograms\TCD\Graphics\StarChart\LibsAndInclude\Libs;D:\MiscPrograms\TCD\Graphics\References\Libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>LibsAndInclude\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>LibsAndInclude\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
