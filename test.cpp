@@ -124,6 +124,7 @@ int main()
         glm::mat4 view = camera.GetViewMatrix();
         ourShader.setMat4("projection", projection);
         ourShader.setMat4("view", view);
+        ourShader.setVec3("viewPos", camera.Position);
 
         // render the sun model
         glm::mat4 model = glm::mat4(1.0f);
