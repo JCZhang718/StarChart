@@ -13,9 +13,13 @@ uniform vec3 viewPos;
 void main()
 {
     // phong illumination model: ambient + diffuse + specular
+    float ambientStrength = 0.3;
+    float diffuseStrength = 1.0;
+    float specularStrength = 0.5;
+    float specularPower = 128;
+
     // ambient
     vec3 ambientColor = vec3(1.0, 1.0, 1.0);
-    float ambientStrength = 0.3;
     vec3 ambient = ambientStrength * ambientColor;
 
     // diffuse - light source is the Sun
@@ -24,13 +28,12 @@ void main()
     vec3 normal = normalize(VertexNormal);
     vec3 lightDir = normalize(lightPos - WorldPos);
     float diff = max(dot(normal, lightDir), 0.0);
-    vec3 diffuse = diff * lightColor;
+    vec3 diffuse = diff * diffuseStrength * lightColor;
 
     // specular
-    float specularStrength = 0.5;
     vec3 viewDir = normalize(viewPos - WorldPos);
     vec3 reflectDir = reflect(-lightDir, normal);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), specularPower);
     vec3 specular = specularStrength * spec * lightColor;
 
     vec3 inputColor = texture(texture_diffuse1, TexCoords).xyz;
