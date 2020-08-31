@@ -32,6 +32,9 @@
     <None Include="FragmentShader.fs">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="AmbientFragmentShader.fs">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">

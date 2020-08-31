@@ -24,6 +24,7 @@
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="AmbientFragmentShader.fs" />
     <None Include="FragmentShader.fs" />
     <None Include="VertexShader.vs" />
   </ItemGroup>
